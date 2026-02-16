@@ -102,3 +102,4 @@ npm run check
 - `iphone_run_command` blocks write-like commands by design.
 - Use `iphone_run_write_command` for write actions and provide `write_paths` in allowed roots.
 - `iphone_respring` requires `confirm=true`.
+- `iphone_tweak_status` checks `/status` first and falls back to `/ping` for daemons that expose only ping health.

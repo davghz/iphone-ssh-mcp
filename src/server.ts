@@ -460,11 +460,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case "iphone_tweak_status": {
-        const response = await tweak.request("/status");
-        if (!response.ok) {
-          return textResult(`Tweak status request failed: ${response.error ?? response.raw}`, true);
+        let response = await tweak.request("/status");
+        let endpoint = "/status";
+        if (!response.ok && response.status === 404) {
+          response = await tweak.request("/ping");
+          endpoint = "/ping";
         }
-        return textResult(`status=${response.status}\n${formatUnknown(response.data)}`, false);
+        if (!response.ok) {
+          return textResult(
+            `Tweak status request failed on ${endpoint}: ${response.error ?? response.raw}`,
+            true,
+          );
+        }
+        return textResult(
+          `endpoint=${endpoint}\nstatus=${response.status}\n${formatUnknown(response.data)}`,
+          false,
+        );
       }
 
       case "iphone_tweak_request": {
@@ -489,7 +500,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           return textResult(`Screenshot request failed: ${response.error ?? response.raw}`, true);
         }
 
-        const image = (response.data as { image?: unknown }).image;
+        const image = (response.data as { image?: unknown; data?: unknown }).image
+          ?? (response.data as { image?: unknown; data?: unknown }).data;
         if (typeof image !== "string" || image.length === 0) {
           return textResult(`Screenshot endpoint did not return image payload. Raw: ${formatUnknown(response.data)}`, true);
         }
