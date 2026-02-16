@@ -40,7 +40,7 @@ npm run dev
 
 ## Environment Variables
 
-- `IPHONE_SSH_HOST` (default: `172.20.10.9`)
+- `IPHONE_SSH_HOST` (default: `10.0.0.9`)
 - `IPHONE_SSH_USER` (default: `root`)
 - `IPHONE_SSH_PORT` (default: `22`)
 - `IPHONE_SSH_KEY_PATH` (default: `~/.ssh/id_rsa`)
@@ -65,7 +65,7 @@ npm run dev
       "command": "node",
       "args": ["/Users/davgz/iphone-ssh-mcp/dist/server.js"],
       "env": {
-        "IPHONE_SSH_HOST": "172.20.10.9",
+        "IPHONE_SSH_HOST": "10.0.0.9",
         "IPHONE_SSH_USER": "root",
         "IPHONE_SSH_PASSWORD": "alpine"
       }

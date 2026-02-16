@@ -4,7 +4,7 @@
       "command": "node",
       "args": ["/Users/davgz/iphone-ssh-mcp/dist/server.js"],
       "env": {
-        "IPHONE_SSH_HOST": "172.20.10.9",
+        "IPHONE_SSH_HOST": "10.0.0.9",
         "IPHONE_SSH_USER": "root",
         "IPHONE_SSH_PASSWORD": "alpine",
         "IPHONE_LOCAL_ARTIFACT_ROOTS": "/Users/davgz/iphone-ssh-mcp"

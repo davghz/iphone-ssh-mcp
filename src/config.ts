@@ -61,7 +61,7 @@ const defaultKnownHosts = path.join(os.homedir(), ".ssh", "known_hosts");
 const defaultKeyPath = path.join(os.homedir(), ".ssh", "id_rsa");
 
 export const config: ServerConfig = {
-  sshHost: env("IPHONE_SSH_HOST", "172.20.10.9")!,
+  sshHost: env("IPHONE_SSH_HOST", "10.0.0.9")!,
   sshUser: env("IPHONE_SSH_USER", "root")!,
   sshPort: envInt("IPHONE_SSH_PORT", 22),
   sshKeyPath: env("IPHONE_SSH_KEY_PATH", defaultKeyPath),
