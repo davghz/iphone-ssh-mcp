@@ -89,5 +89,8 @@ export function isLikelyWriteCommand(command: string): boolean {
 }
 
 export function escapeScpRemotePath(pathname: string): string {
-  return shellQuote(pathname);
+  // SCP path args are passed directly as argv (no local shell), so wrapping the
+  // path in quotes makes those quotes literal on the remote side. Escape only
+  // characters that SCP's remote shell parsing can treat specially.
+  return pathname.replace(/([\\\s"'`$!#&*()[\]{};<>?|~:])/g, "\\$1");
 }

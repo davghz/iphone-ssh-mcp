@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   ensureAllowedLocalPath,
   ensureAllowedWritePaths,
+  escapeScpRemotePath,
   isLikelyWriteCommand,
   matchDeniedPattern,
   normalizeRemotePath,
@@ -43,4 +44,10 @@ test("write detector catches writes but not read commands", () => {
 test("shellQuote safely wraps apostrophes", () => {
   assert.equal(shellQuote("abc"), "'abc'");
   assert.equal(shellQuote("a'b"), "'a'\\''b'");
+});
+
+test("escapeScpRemotePath escapes shell-significant chars without adding wrapper quotes", () => {
+  assert.equal(escapeScpRemotePath("/tmp/file.deb"), "/tmp/file.deb");
+  assert.equal(escapeScpRemotePath("/tmp/my file.deb"), "/tmp/my\\ file.deb");
+  assert.equal(escapeScpRemotePath("/tmp/weird'file"), "/tmp/weird\\'file");
 });
